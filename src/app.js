@@ -5,13 +5,12 @@ require("dotenv").config()
 
 // Routes
 const bookRoute = require("./routes/books")
-const MONGO_URL = "mongodb+srv://user:bookapp@cluster0.eruyl.mongodb.net/?retryWrites=true&w=majority"
 const app = express()
 app.use(express.json())
 
 // Connect to MongoDB
 mongoose
-.connect(MONGO_URL, {
+.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
