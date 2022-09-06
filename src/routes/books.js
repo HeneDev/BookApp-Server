@@ -2,6 +2,17 @@ const router = require("express").Router()
 const { body, validationResult } = require("express-validator")
 const Book = require("../models/Book")
 
+
+// Get all Books
+router.get("/", async (req, res) => {
+    try {
+        const books = await Book.find()
+        res.status(200).json(books)
+    } catch(err) {
+        res.status(500).json(err)
+    }
+})
+
 // Create new Book
 router.post("/add",
 //Title, author or description must not be empty
@@ -23,16 +34,6 @@ router.post("/add",
         res.status(200).json(savedBook)
     } catch(err) {
         res.status(500).json( { message: err.message })
-    }
-})
-
-// Get all Books
-router.get("/", async (req, res) => {
-    try {
-        const books = await Book.find()
-        res.status(200).json(books)
-    } catch(err) {
-        res.status(500).json(err)
     }
 })
 
